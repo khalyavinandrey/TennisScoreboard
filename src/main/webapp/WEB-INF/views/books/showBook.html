@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1 th:text="${book.getName()}"></h1>
+    <p th:text="${book.getName() + ', ' + book.getAuthor() + ', ' + book.getYear()}"></p>
+    <div th:if="${person != null}">
+        <label th:text="${person.getFullName()}"></label>
+        <label>has a book now</label>
+        <form th:method="POST" th:action="@{/books/{id}(id=${book.getId()})}">
+            <br>
+            <input type="submit" value="Release the book">
+        </form>
+    </div>
+
+    <div th:with="selectedPerson=''" th:if="${person == null}">
+        <p>This book is now available!</p>
+        <form th:method="POST" th:action="@{/books/{id}/assign(id=${book.getId()})}">
+            <label for="fullname">Assign book to</label>
+            <select name="personId" id="fullname">
+                <option th:each="p : ${people}"
+                        th:value="${p.personId}"
+                        th:text="${p.fullName}">
+                </option>
+            </select>
+            <button type="submit">Assign</button>
+        </form>
+    </div>
+
+<!--    <div th:if="${person == null}" th:with="iden = ${'person.getPersonId()'}">-->
+<!--        <p>This book is now available!</p>-->
+<!--        <label for="fullname"></label>-->
+<!--        <select id="fullname" th:field="${iden}">-->
+<!--            <option th:each="pers : ${people}" th:value="${'pers.personId'}" th:text="${pers.fullName}"></option>-->
+<!--        </select>-->
+
+<!--        <form th:action="@{/books/{id}/assign(id=${book.getId()})}" th:method="POST">-->
+<!--            <button type="submit">Assign</button>-->
+<!--        </form>-->
+
+<!--    </div>-->
+    <hr>
+    <form th:method="GET" th:action="@{/books}">
+        <input type="submit" value="Comeback to previous page">
+    </form>
+    <form th:method="GET" th:action="@{/books/{id}/edit(id=${book.getId()})}">
+        <input type="submit" value="Edit">
+    </form>
+    <form th:method="DELETE" th:action="@{/books/{id}(id=${book.getId()})}">
+        <input type="submit" value="Delete">
+    </form>
+</body>
+</html>

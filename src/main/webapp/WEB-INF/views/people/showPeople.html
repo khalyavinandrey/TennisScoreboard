@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>People</title>
+</head>
+<body>
+<h1>Library's visitors</h1>
+    <div th:if="${personList.size() == 0}">
+        <p>There's no visitors</p>
+    </div>
+    <div th:if="${personList.size() != 0}" th:each="person : ${personList}">
+        <a th:href="@{/people/{id}(id=${person.getPersonId()})}"
+           th:text="${person.getFullName() + ', ' + person.getYearOfBirth()}"></a>
+    </div>
+    <hr>
+    <form th:method="GET" th:action="@{/people/new}">
+        <button type="submit">Create new person!</button>
+    </form>
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Books in library</h1>
+    <div th:if="${bookList.size() == 0}">
+        <p>There's no books</p>
+    </div>
+    <div th:if="${bookList.size() != 0}" th:each="book : ${bookList}">
+      <a th:href="@{/books/{id}(id=${book.getId()})}" th:text="${book.getName() + ', ' + book.getAuthor() + ', ' + book.getYear()}"></a>
+    </div>
+    <hr>
+    <form th:method="GET" th:action="@{/books/new}">
+        <button type="submit">Add new book!</button>
+    </form>
+</body>
+</html>
