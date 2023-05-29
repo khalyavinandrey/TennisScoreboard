@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <span style="font-size: 24px">Match №</span> <span style="font-size: 24px" th:text="${ongoingMatch.getId()}"></span>
+    <hr>
+    <table>
+        <tr>
+            <th th:text="${ongoingMatch.getFirstPlayer().getName()}"></th>
+            <th th:text="${ongoingMatch.getSecondPlayer().getName()}"></th>
+        </tr>
+        <tr>
+            <td style="text-align: center" th:text="${ongoingMatch.getFirstPlayerScore()}"></td>
+            <td style="text-align: center" th:text="${ongoingMatch.getSecondPlayerScore()}"></td>
+        </tr>
+    </table>
+    <form th:method="POST" th:action="@{/match-score}" th:object="${ongoingMatch}">
+        <input type="hidden" name="firstPlayerId" th:value="${ongoingMatch.getFirstPlayer().getId()}">
+        <input type="hidden" name="matchId" th:value="${ongoingMatch.getId()}">
+        <input type="submit" value="Point to first player">
+    </form>
+    <form th:method="POST" th:action="@{/match-score}" th:object="${ongoingMatch}">
+        <input type="hidden" name="secondPlayerId" th:value="${ongoingMatch.getSecondPlayer().getId()}">
+        <input type="hidden" name="matchId" th:value="${ongoingMatch.getId()}">
+        <input type="submit" value="Point to second player">
+    </form>
+</body>
+</html>

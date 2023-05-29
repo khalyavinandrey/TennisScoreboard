@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <form th:method="POST" th:action="@{/matches}">
+    <label for="name">Enter player's name</label>
+    <input type="text" th:name="playerToSearch" id="name">
+    <hr>
+    <input type="submit" value="SEARCH">
+    <hr>
+  </form>
+  <div th:if="${nullPlayer == null}">
+
+  </div>
+  <div th:if="${foundMatch != null}">
+    <p th:text="${foundMatch.getFirstPlayer().getName() + ': ' + foundMatch.getFirstPlayerScore()}"></p>
+    <p th:text="${foundMatch.getSecondPlayer().getName() + ': ' + foundMatch.getSecondPlayerScore()}"></p>
+    <p th:text="${'Winner is: ' + foundMatch.getWinner().getName()}"></p>
+    <hr>
+  </div>
+  <div th:if="${foundMatch == null}">
+    <div th:each="finishedMatch : ${listOfFinishedMatches}">
+      <p th:text="${finishedMatch.getFirstPlayer().getName() + ': ' + finishedMatch.getFirstPlayerScore()}"></p>
+      <p th:text="${finishedMatch.getSecondPlayer().getName() + ': ' + finishedMatch.getSecondPlayerScore()}"></p>
+      <p th:text="${'Winner is: ' + finishedMatch.getWinner().getName()}"></p>
+      <hr>
+    </div>
+  </div>
+</body>
+</html>
