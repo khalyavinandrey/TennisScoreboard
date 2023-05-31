@@ -81,10 +81,6 @@ public class MatchController {
         return "match/finishedMatches";
     }
 
-    // при нажатии будет отправляться post с определенным именем
-    // в post методе по этому имени будет формироваться список людей с похожим именем и этот список будет в этом же view
-    // получается изначально будет поле поиска, кнопка и матчи, а при нажатии на кнопку поиска будет отображаться уже другой список
-
     @PostMapping("/matches")
     public String postMatches(@RequestParam("playerToSearch") String name,
                               Model model) {
